@@ -1,0 +1,8 @@
+# Scripts
+build.sh
+frontend.sh
+package.sh
+run.sh
+
+# VSCode Artifact
+.vs/
