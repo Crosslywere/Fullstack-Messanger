@@ -5,4 +5,7 @@ package.sh
 run.sh
 
 # VSCode Artifact
-.vs/
+.vscode/
+
+# IntelliJ IDEA Artifact
+.idea/
