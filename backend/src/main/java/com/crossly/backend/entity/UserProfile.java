@@ -1,5 +1,6 @@
 package com.crossly.backend.entity;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -30,7 +31,8 @@ public class UserProfile implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    @Builder.Default
-    private List<GrantedAuthority> authorities = List.of();
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
 
 }
