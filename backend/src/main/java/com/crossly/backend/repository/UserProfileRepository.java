@@ -7,9 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import com.crossly.backend.entity.UserProfile;
 
-
 @Repository
-public interface UserProfileRepository extends JpaRepository<UserProfile, String>{
+public interface UserProfileRepository extends JpaRepository<UserProfile, String> {
 
     Optional<UserProfile> findByUsername(String username);
 
