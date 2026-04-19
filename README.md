@@ -24,18 +24,48 @@ It also uses the JWT dependency version `0.13.0`.
 
 ### Dependency List
 
-| Name                 | Version  |
-| -------------------- | -------- |
-| Spring Boot DevTools | `4.0.5`  |
-| Lombok               | `4.0.5`  |
-| Spring Web           | `4.0.5`  |
-| Spring Security      | `4.0.5`  |
-| Spring Data JPA      | `4.0.5`  |
-| PostgreSQL Driver    | `4.0.5`  |
-| WebSocket            | `4.0.5`  |
-| Validation           | `4.0.5`  |
-| jjwt-api             | `0.13.0` |
-| jjwt-impl            | `0.13.0` |
-| jjwt-jackson         | `0.13.0` |
+| Name[groupId/artifactId]                                | Version   |
+| ------------------------------------------------------- | --------- |
+| **org.springframework.boot/sring-boot-starter-parent**  | `4.0.5`   |
+| org.springframework.boot/spring-boot-starter-data-jpa   | `3.3.5`   |
+| org.springframework.boot/spring-boot-starter-security   | `3.4.5`   |
+| org.springframework.boot/spring-boot-starter-validation | `3.5.7`   |
+| org.springframework.boot/spring-boot-starter-webmvc     | `4.0.0`   |
+| org.springframework.boot/spring-boot-starter-websocket  | `3.4.5`   |
+| org.springframework.boot/spring-boot-devtools           | `3.3.5`   |
+| org.postgresql/postgresql                               | `42.7.10` |
+| org.projectlombok/lombok                                | `1.18.30` |
+| org.junit.jupiter/junit-jupiter-api                     | `5.10.2`  |
+| org.springframework.boot/spring-boot-test               | `3.3.4`   |
+| io.jsonwebtoken/jjwt-api                                | `0.13.0`  |
+| io.jsonwebtoken/jjwt-impl                               | `0.13.0`  |
+| io.jsonwebtoken/jjwt-jackson                            | `0.13.0`  |
 
 **_Java_** version `21 LTS`
+
+## Frontend
+
+The frontend is created using Vite + React + TypeScript. The creation script:
+
+```sh
+npm create vite frontend -- --template react-ts
+cd frontend
+npm install axios react-router-dom sockjs-client @stomp/stompjs tailwindcss @tailwindcss/vite date-fns react-toastify
+npm install --save-dev @types/sockjs-client
+```
+
+### Dependency List
+
+| Name                 | Version  |
+| -------------------- | -------- |
+| @stomp/stompjs       | `7.3.0`  |
+| @tailwindcss/vite    | `4.2.2`  |
+| @types/sockjs-client | `1.5.4`  |
+| axios                | `1.15.0` |
+| date-fns             | `4.1.0`  |
+| react-router-dom     | `7.14.1` |
+| react-toastify       | `11.0.5` |
+| sockjs-client        | `1.6.1`  |
+| tailwindcss          | `4.2.2`  |
+
+**_NPM_** version `11.12.1`
