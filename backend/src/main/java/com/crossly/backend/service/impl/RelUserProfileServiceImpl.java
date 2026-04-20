@@ -29,14 +29,14 @@ public class RelUserProfileServiceImpl implements UserProfileService {
 
     @Override
     public AuthResponse registerUser(AuthRequest request, HttpServletResponse response) {
-        var user = userProfileRepository.findByUsername(request.username().trim());
-        if (user.isPresent())
+        var optUser = userProfileRepository.findByUsername(request.username().trim());
+        if (optUser.isPresent())
             throw AuthException.usernameExists();
-        var u = userProfileRepository.save(UserProfile.builder()
+        var user = userProfileRepository.save(UserProfile.builder()
                 .username(request.username().trim())
                 .password(passwordEncoder.encode(request.password()))
                 .build());
-        attachTokenCookie(response, jwtService.generateToken(u));
+        attachTokenCookie(response, jwtService.generateToken(user));
         return AuthResponse.successfulRegiseter();
     }
 
