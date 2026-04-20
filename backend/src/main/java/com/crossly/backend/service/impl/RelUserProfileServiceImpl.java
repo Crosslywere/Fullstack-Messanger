@@ -48,8 +48,7 @@ public class RelUserProfileServiceImpl implements UserProfileService {
             attachTokenCookie(response, jwtService.generateToken(user));
             return AuthResponse.successfulLogin();
         }
-
-        throw new AuthException("Invalid login credentials!");
+        throw AuthException.invalidCredentials();
     }
 
 }
