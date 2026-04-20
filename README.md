@@ -63,6 +63,9 @@ npm install --save-dev @types/sockjs-client
 | @types/sockjs-client | `1.5.4`  |
 | axios                | `1.15.0` |
 | date-fns             | `4.1.0`  |
+| react                | `19.2.0` |
+| react-dom            | `19.2.0` |
+| react-icons          | `5.6.0`  |
 | react-router-dom     | `7.14.1` |
 | react-toastify       | `11.0.5` |
 | sockjs-client        | `1.6.1`  |
