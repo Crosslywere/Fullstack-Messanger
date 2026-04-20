@@ -23,6 +23,8 @@ public class RelUserProfileServiceImpl implements UserProfileService {
 
     private final UserProfileRepository userProfileRepository;
 
+    private final JwtService jwtService;
+
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Override
@@ -30,10 +32,11 @@ public class RelUserProfileServiceImpl implements UserProfileService {
         var user = userProfileRepository.findByUsername(request.username().trim());
         if (user.isPresent())
             throw AuthException.usernameExists();
-        userProfileRepository.save(UserProfile.builder()
+        var u = userProfileRepository.save(UserProfile.builder()
                 .username(request.username().trim())
                 .password(passwordEncoder.encode(request.password()))
                 .build());
+        attachTokenCookie(response, jwtService.generateToken(u));
         return AuthResponse.successfulRegiseter();
     }
 
@@ -41,8 +44,10 @@ public class RelUserProfileServiceImpl implements UserProfileService {
     public AuthResponse loginUser(AuthRequest request, HttpServletResponse response) throws UsernameNotFoundException {
         var user = userProfileRepository.findByUsername(request.username().trim())
                 .orElseThrow(() -> AuthException.invalidCredentials());
-        if (passwordEncoder.matches(request.password(), user.getPassword()))
+        if (passwordEncoder.matches(request.password(), user.getPassword())) {
+            attachTokenCookie(response, jwtService.generateToken(user));
             return AuthResponse.successfulLogin();
+        }
 
         throw new AuthException("Invalid login credentials!");
     }
