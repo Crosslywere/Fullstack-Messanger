@@ -3,6 +3,7 @@ build.sh
 frontend.sh
 package.sh
 run.sh
+run*.sh
 
 # VSCode Artifact
 .vscode/
