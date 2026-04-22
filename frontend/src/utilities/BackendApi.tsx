@@ -19,6 +19,9 @@ api.interceptors.response.use(
         toast.error(`No connection to the backend was defined in .env`);
       }
     } else if (error.response?.data !== undefined) {
+      if (error.response?.status === 401) {
+        window.location.href = "/login";
+      }
       const { status, message } = error.response.data as ErrorResponse;
       toast.error(`Error ${status} - ${message}`, {
         closeOnClick: true,

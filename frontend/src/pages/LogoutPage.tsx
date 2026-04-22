@@ -6,10 +6,12 @@ function LogoutPage() {
   const navigate = useNavigate();
   const [completed, setCompleted] = useState(false);
   useEffect(() => {
-    api
-      .post("/api/public/auth/logout")
-      .then(() => setCompleted(true))
-      .finally(() => setTimeout(() => navigate("/"), 5000));
+    api.post<boolean>("/api/public/auth/logout").then((response) => {
+      if (response.data) {
+        setCompleted(true);
+        setTimeout(() => navigate("/"), 1000);
+      }
+    });
   });
   return (
     <div className="min-h-dvh container flex place-content-center items-center mx-auto">
