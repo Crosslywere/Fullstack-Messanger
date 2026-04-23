@@ -1,6 +1,8 @@
 package com.crossly.backend.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,8 +36,17 @@ public class AuthController {
     }
 
     @PostMapping("/logout")
-    public void logoutUser(HttpServletResponse response) {
-        userProfileService.removeJwtToken(response);
+    public ResponseEntity<Boolean> logoutUser(HttpServletResponse response) {
+        UserProfileService.removeJwtToken(response);
+        return ResponseEntity.ok(true);
+    }
+
+    @PostMapping("/validate")
+    public ResponseEntity<Boolean> validateConnection() {
+        if (SecurityContextHolder.getContext().getAuthentication() != null
+                && SecurityContextHolder.getContext().getAuthentication().getAuthorities() != null)
+            return ResponseEntity.ok().body(true);
+        return new ResponseEntity<>(false, HttpStatus.UNAUTHORIZED);
     }
 
 }
