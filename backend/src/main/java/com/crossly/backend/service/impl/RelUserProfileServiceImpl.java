@@ -36,7 +36,7 @@ public class RelUserProfileServiceImpl implements UserProfileService {
                 .username(request.username().trim())
                 .password(passwordEncoder.encode(request.password()))
                 .build());
-        attachTokenCookie(response, jwtService.generateToken(user));
+        UserProfileService.attachTokenCookie(response, jwtService.generateToken(user));
         return AuthResponse.successfulRegiseter();
     }
 
@@ -45,7 +45,7 @@ public class RelUserProfileServiceImpl implements UserProfileService {
         var user = userProfileRepository.findByUsername(request.username().trim())
                 .orElseThrow(() -> AuthException.invalidCredentials());
         if (passwordEncoder.matches(request.password(), user.getPassword())) {
-            attachTokenCookie(response, jwtService.generateToken(user));
+            UserProfileService.attachTokenCookie(response, jwtService.generateToken(user));
             return AuthResponse.successfulLogin();
         }
         throw AuthException.invalidCredentials();
