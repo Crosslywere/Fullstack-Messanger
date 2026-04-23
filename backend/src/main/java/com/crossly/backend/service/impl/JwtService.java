@@ -66,7 +66,7 @@ public class JwtService {
             var exp = extractExpiration(token);
             var iss = extractIssuedAt(token);
             var now = new Date();
-            if (iss.after(now) || exp.before(now))
+            if (iss.after(now) && exp.before(now))
                 return false;
         } catch (JwtException e) {
             return false;
